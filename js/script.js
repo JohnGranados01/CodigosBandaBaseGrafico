@@ -185,22 +185,16 @@ function quinta(){
     var polaridad = true;
     for(var x =0; x<entero.length;x++){
         if(split[x]=="1"){
-            lista.push(split[x]);
-            polaridad = !polaridad;
-            console.log(polaridad);
-            if(split[x]=="1"){
-                var replace1 = split[x].replace(/-1/g,1);
-                lista.push(replace1);
-                polaridad = !polaridad;
+            var replace1;
+            if(polaridad==false){
+                replace1 = split[x].replace(/1/g,-1);
             }else{
-                var replace1 = split[x].replace(/0/g,0);
-                lista.push(replace1);
-                polaridad = !polaridad;
-
-            }
-        }else{
-            var replace1 = split[x].replace(/0/g,0);
+                replace1 = split[x].replace(/1/g,1);
+            } 
             lista.push(replace1);
+            polaridad = !polaridad;
+        }else{
+            lista.push(split[x]);
         }
         arreglo.push({
             x: split[x],
