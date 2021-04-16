@@ -202,7 +202,7 @@ function quinta(){
         });
     }
 
-    window.m = Morris.Bar({
+    window.m = Morris.Line({
     element: 'graph5',
     data: arreglo,
     xkey: 'x',
