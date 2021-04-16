@@ -120,7 +120,7 @@ function tercera(){
         });
     }
 
-    window.m = Morris.Bar({
+    window.m = Morris.Line({
     element: 'graph3',
     data: cambio,
     xkey: 'x',
@@ -158,7 +158,7 @@ function cuarta(){
         });
     }
 
-    window.m = Morris.Bar({
+    window.m = Morris.Line({
     element: 'graph4',
     data: cambio,
     xkey: 'x',
@@ -219,11 +219,50 @@ function quinta(){
     });
 }
 
+function sexta(){
+    var arreglo = [];
+    var lista = [];
+    var entero = send();
+    const split = entero.split("");
+    var polaridad = true;
+    for(var x =0; x<entero.length;x++){
+        if(split[x]=="0"){
+            var replace1;
+            if(polaridad==false){
+                replace1 = split[x].replace(/0/g,-1);
+            }else{
+                replace1 = split[x].replace(/0/g,1);
+            } 
+            lista.push(replace1);
+            polaridad = !polaridad;
+        }else{
+            replace1 = split[x].replace(/1/g,0);
+            lista.push(replace1);
+        }
+        arreglo.push({
+            x: split[x],
+            y: lista[x]
+        });
+    }
 
-$("#btnAceptar").on("click", function(){
-    quinta();
-    
-}); 
+    window.m = Morris.Line({
+    element: 'graph6',
+    data: arreglo,
+    xkey: 'x',
+    ykeys: ['y'],
+    labels: ['numero binario'],
+    parseTime: false,
+    hoverCallback: function (index, options, default_content, row) {
+        return default_content.replace("numero binario", "(" + row.x + ")");
+    },
+    xLabelMargin: 10,
+    resize: true,
+    grid: true,
+    integerYLabels: true
+    });
+}
+
+
 $("#btnPrimera").on("click", function(){
     primera();
 }); 
@@ -238,4 +277,11 @@ $("#btnTercera").on("click", function(){
 
 $("#btnCuarta").on("click", function(){
     cuarta();
+}); 
+
+$("#btnQuinta").on("click", function(){
+    quinta();
+}); 
+$("#btnSexta").on("click", function(){
+    sexta();
 }); 
