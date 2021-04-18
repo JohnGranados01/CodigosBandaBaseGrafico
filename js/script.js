@@ -296,7 +296,7 @@ function septima(){
         });
     }
 
-    window.m = Morris.Bar({
+    window.m = Morris.Line({
     element: 'graph7',
     data: arreglo,
     xkey: 'x',
