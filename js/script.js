@@ -175,7 +175,7 @@ function cuarta(){
     });
 }
 
-//Grafica Bipolares de 1
+//Grafica Bipolar de 1
 
 function quinta(){
     var arreglo = [];
@@ -219,6 +219,7 @@ function quinta(){
     });
 }
 
+//Grafica Bipolar de 0
 function sexta(){
     var arreglo = [];
     var lista = [];
@@ -262,6 +263,56 @@ function sexta(){
     });
 }
 
+// Grafica Diferencial
+function septima(){
+    var arreglo = [];
+    var lista = [];
+    var entero = send();
+    const split = entero.split("");
+    split.shift();
+    var polaridad = true;
+    for(var x =0; x<split.length;x++){
+        var replace1;
+        if(split[x]=="1"){
+            if(polaridad==false){
+                replace1 = split[x].replace(/1/g,0);
+            }else{ 
+                replace1 = split[x].replace(/1/g,1);
+            } 
+            lista.push(replace1);
+            polaridad = !polaridad;
+        }else{
+            if(polaridad==false){
+                replace1 = split[x].replace(/0/g,1);
+                lista.push(replace1);
+            }else{ 
+                lista.push(split[x]);
+                
+            } 
+        }
+        arreglo.push({
+            x: split[x],
+            y: lista[x]
+        });
+    }
+
+    window.m = Morris.Bar({
+    element: 'graph7',
+    data: arreglo,
+    xkey: 'x',
+    ykeys: ['y'],
+    labels: ['numero binario'],
+    parseTime: false,
+    hoverCallback: function (index, options, default_content, row) {
+        return default_content.replace("numero binario", "(" + row.x + ")");
+    },
+    xLabelMargin: 10,
+    resize: true,
+    grid: true,
+    integerYLabels: true
+    });
+}
+
 
 $("#btnPrimera").on("click", function(){
     primera();
@@ -285,3 +336,6 @@ $("#btnQuinta").on("click", function(){
 $("#btnSexta").on("click", function(){
     sexta();
 }); 
+$("#btnSiete").on("click", function(){
+    septima();
+});
